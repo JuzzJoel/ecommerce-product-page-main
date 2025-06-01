@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | E-commerce product page</title>
+  <style>
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --Orange: hsl(26, 100%, 55%);
+      --Pale-orange: hsl(25, 100%, 94%);
+      --Very-dark-blue: hsl(220, 13%, 13%);
+      --Dark-grayish-blue: hsl(219, 9%, 45%);
+      --Grayish-blue: hsl(220, 14%, 75%);
+      --Light-grayish-blue: hsl(223, 64%, 98%);
+      --White: hsl(0, 0%, 100%);
+      --Black-75percent-opacity: rgba(0, 0, 0, 0.75);
+      --fz-paragraph: 1rem;
+      --ff: "Kumbh Sans", sans-serif;
+      --fw-normal: 400;
+      --fw-bold: 700;
+    }
+
+    body {
+      font-family: var(--ff);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Mobile styles (default) */
+
+.main-navbar{
+  display: none;
+}
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-bar {
+      height: 10vh;
+      background: var(--White);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-weight: var(--fw-bold);
+    }
+
+    .header-container {
+      width: 90%;
+      height: 50%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .main-header {
+      width: 60%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .mobile-toggle {
+      width: 10%;
+      height: 100%;
+      align-items: center;
+      display: flex;
+    }
+
+    .mobile-close-icon-container {
+      cursor: pointer;
+      width: 10%;
+      height: 100%;
+    }
+
+    .mobile-toggle-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .mobile-close-icon {
+      margin-bottom: 10%;
+    }
+
+  
+    .hamburger,
+    .close-button {
+      object-fit: contain;
+      width: 50%;
+      height: 50%;
+      cursor: pointer;
+    }
+  
+    .mobile-navbar {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: var(--White);
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 70%;
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;  
+      z-index: 100;
+    }
+    .mobile-navbar.show {
+      transform: translateX(0);
+    }
+    
+    .mobile-navbar-container {
+      width: 90%;
+      height: 90%;
+    }
+
+    .mobile-close-icon {
+      width: 100%;
+      height: 10%;
+    }
+
+    .mobile-nav {
+      height: 40%;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: inherit;
+    }
+
+    .mobile-nav a {
+      text-decoration: none;
+      color: var(--Black-75percent-opacity);
+      font-size: 1.1rem;
+      line-height: 1.2;
+      letter-spacing: 1px;
+    }
+
+    .logo {}
+
+    .cart-user-profile {
+      width: 20%;
+      height: 80%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid #000;
+    }
+
+    .cart-container {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+    }
+    .cart-amount-badge {
+      position: absolute;
+      background: var(--Orange);
+      color: var(--White);
+      padding: 6px 8px;
+      top: -20%;
+      right: -5%;
+      border-radius: 50%;
+      font-size: 0.8rem;
+    }
+
+    .cart-icon {
+      width: 100%;
+      height: 70%;
+      object-fit: contain;
+    }
+
+    .profile-container {
+      width: 50%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .profile-image {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+
+    .main-content{
+     height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .display-products {
+      width: 100%;
+   min-height: 50vh;
+    }
+
+    .main-image {
+      height: 80vh;
+      width: 100%;
+      object-fit: contain;
+      position: relative;
+      display: flex;
+    }
+    
+    .main-image > img{
+      display: none;
+    }
+    .main-image > img.active {
+      display: block;
+    }
+img{
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+    .move-icon {
+      object-fit: contain;
+      width: 60%;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      padding: 13px 13px;
+      background: var(--White);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      cursor: pointer;
+    }
+    .right{
+right: 5%;
+    }
+    .left{
+left: 5%;
+    }
+
+
+    .right .move-icon {}
+
+    .left .move-icon {}
+
+    .thumbnails {
+      display: none;
+    }
+
+    .product-information {
+      height: 30vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+     .product-information-container{
+      width: 90%;
+      height: 100%;
+     }
+     .product-information-content{
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      display: flex;
+      justify-content: space-evenly;
+      letter-spacing: 1px;
+      line-height: 1.1;
+      font-size: var(--fz-paragraph);
+     }
+     .product-information-content .eyebrow{
+      text-transform: uppercase;
+      color: rgb(0, 0, 0 , .60);
+
+     }
+     .product-information-content .title{
+      font-size: 2.5rem;
+     }
+     .product-information-content .desc{
+      color: rgb(0, 0, 0 , .60);
+      line-height: 1.5;
+     }
+     .prices{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      font-size: 2rem;
+      font-weight: var(--fw-bold);
+
+     }
+     .new-discount{
+      display: flex;
+      align-items: end;
+      width: 35%;
+      justify-content: space-between;
+
+     }
+     .new{
+
+
+     }
+     .discount{
+font-size: 1rem;
+color: white;
+font-weight: 400;
+background: #000;
+border-radius: 0.3rem;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 5px 10px;
+     }
+     .old{
+text-decoration: line-through; 
+  color: rgb(0, 0, 0 , .60);
+  height: 50%;
+  font-size: 1rem;
+     }
+
+     .add-to-cart{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      height: 30vh;
+     }
+     .quantity-adder{
+      border-radius: 0.7rem;
+      width: 100%;
+      height: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eee;
+      margin: 7% 0;
+     }
+     .display-adder{
+display: flex;
+justify-content: space-between;
+width: 100%;
+height: 50%;
+
+     }
+     .cart-button{
+      object-fit: contain;
+      width: 50%;
+      height: 50%;
+      cursor: pointer;
+     }
+     .subtract{
+width: 20%;
+height: 40%;
+cursor: pointer;
+     }
+     .display-number{
+width: 60%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: var(--fw-bold);
+font-size: 1.7rem;
+     }
+     .add{
+width: 20%;
+display: flex;
+justify-content: end;
+align-items: center;
+cursor: pointer;
+     }
+     .button{
+      height: 20%;
+      width: 100%;
+      box-shadow: 0 0 .7rem .5rem rgba(0, 0 , 0, 0.15);
+      font-size: 1.2rem;
+      background: var(--Orange);
+      border-radius: .7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+     }
+     .button-container{
+      height: 100%;
+      width: 40%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: var(--fw-bold);
+      padding-left: 10%;
+      color: #000;
+     }
+     .button-cart{
+      object-fit: contain;
+      filter: brightness(0);
+      display: flex;
+      align-items: center;
+     }
+     .cart-modal{
+      position: absolute ;
+      transform: translate( -2.5%,-10%);
+      top: 20%;
+      right: 0;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 95%;
+      margin: 0 auto;
+      height: 50vh;
+      z-index: 1000;
+      border-radius: .7rem;
+     }
+     .cart-modal-content{
+      width: 80%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+     }
+     .cart-modal-items{
+      width: 100%;
+     }
+     .cart-modal-head{
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      width: 100%;
+      height: 10%;
+     }
+     hr{
+      width: 125%;
+      color: #eee;
+      position: absolute;
+      top: 15%;
+     }
+     .cart-main-content{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 70%;
+      gap: 20%;
+     }
+     .cart-modal-items{
+      display: flex;
+      align-items: center;
+justify-content: space-between;
+width: 100%;
+height: 20%;
+border: 1px solid #000;
+     }
+     .img-container{
+      width: 10%;
+      height: 100%;
+     }
+     .modal-image{
+      object-fit: contain;
+      border-radius: 0.3rem;
+     }
+.description{
+  width: 70%;
+}
+.details{
+  color: rgb(0, 0, 0 , 0.6);
+}
+
+.trash-icon{
+  width: 10%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.modal-trash-icon{
+  object-fit: contain;
+  width: 50%;
+  height: 50%;
+}
+.price{
+  display: flex;
+  align-items: center;
+gap: 2%;
+}
+.result{
+  font-weight: var(--fw-bold);
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+.checkout-button{
+  width: 100%;
+  padding: 1.5rem 3rem;
+  background: var(--Orange);
+  font-weight: var(--fw-bold);
+  border-radius: 0.7rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+    /* Tablet styles (768px and up) */
+    @media (min-width: 768px) {
+      .container {
+        width: 80%;
+      }
+        .main-navbar {
+          display: block;
+        }
+        .mobile-toggle {
+          display: none;
+        }
+      
+    }
+
+    /* Desktop styles (1024px and up) */
+    @media (min-width: 1024px) {
+      .container {
+        width: 70%;
+        max-width: 1200px;
+      }
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      position: fixed;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="content">
+      <header class="header-bar">
+        <div class="header-container">
+          <div class="main-header">
+            <div class="mobile-toggle">
+              <div class="mobile-toggle-container">
+                <img src="/images/icon-menu.svg" alt="" class="hamburger">
+              </div>
+            </div>
+            <div class="mobile-navbar">
+              <div class="mobile-navbar-container">
+                <div class="mobile-close-icon">
+                  <div class="mobile-close-icon-container">
+                    <img src="/images/icon-close.svg" alt="" class="close-button">
+                  </div>
+                </div>
+                <ul class="mobile-nav">
+                  <li><a href="">Collections</a></li>
+                  <li><a href="">Men</a></li>
+                  <li><a href="">Women</a></li>
+                  <li><a href="">About</a></li>
+                  <li><a href="">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="logo">
+              <div class="logo-container">
+                <img src="/images/logo.svg" alt="">
+              </div>
+            </div>
+            <div class="main-navbar">
+              <nav class="main-navigation">
+                <ul class="desktop-nav">
+                  <l1><a href="">Collections
+
+
+                    </a></l1>
+                  <l1><a href="">Men</a></l1>
+                  <l1><a href="">Women</a></l1>
+                  <l1><a href="">About</a></l1>
+                  <l1><a href="">Contact</a></l1>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="cart-user-profile">
+            <div class="cart-container">
+              <img src="/images/icon-cart.svg" alt="" class="cart-icon">
+              <span class="cart-amount-badge">0</span>
+            </div>
+            <div class="profile-container">
+              <img src="/images/image-avatar.png" alt="" class="profile-image">
+            </div>
+          </div>
+        </div>
+
+      </header>
+      <main class="main-content">
+        <section class="display-products">
+          <div class="display-products-container">
+            <div class="main-image">
+              <div class="left arrow" onclick="prevImage()">
+                <img src="/images/icon-previous.svg" alt="Previous" class="move-icon">
+              </div>
+              <div class="right arrow" onclick="nextImage()">
+                <img src="/images/icon-next.svg" alt="Next" class="move-icon">
+              </div>
+              
+              <img src="/images/image-product-1.jpg" alt="" class="active" id=""> 
+              <img src="/images/image-product-2.jpg" alt=""> 
+              <img src="/images/image-product-3.jpg" alt="">
+                 <img src="/images/image-product-4.jpg" alt="">
+            </div>
+
+            <div class="thumbnails">
+
+            </div>
+          </div>
+
+        </section>
+        <section class="product-information">
+          <div class="product-information-container">
+            <div class="product-information-content">
+              <h5 class="eyebrow">
+                Sneaker Company
+              </h5>
+              <h2 class="title">
+                Fall Limited Edition Sneakers
+              </h2>
+              <p class="desc">
+                These low-profile sneakers are your perfect casual wear companion. Featuring a
+                durable rubber outer sole, they’ll withstand everything the weather can offer.
+              </p>
+              <div class="prices">
+                <div class="new-discount">
+                  <div class="new">$125.00</div>
+                  <div class="discount">50%</div>
+                </div>
+                <div class="old">$250.00</div>
+
+              </div>
+
+            </div>
+
+<div class="add-to-cart">
+  <div class="quantity-adder">
+    <div class="display-adder">
+      <div class="subtract"><img src="/images/icon-minus.svg" alt="" class="cart-button" id="minus-button" ></div>
+      <div class="display-number"> 0 </div>
+      <div class="add"><img src="/images/icon-plus.svg" alt="" class="cart-button" id="plus-button" ></div>
+    </div>
+  </div>
+  <div class="button">
+    <div class="button-container">
+      <div class="button-cart-container">
+        <img src="/images/icon-cart.svg" alt="" class="button-cart"></div>
+       <span>Add to cart</span>
+      </div>
+  </div>
+
+</div>
+
+
+
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+
+
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+<div class="cart-modal">
+  <div class="cart-modal-content">
+    <div class="cart-modal-head">
+      <h2>Cart</h2>
+    </div>
+
+    <hr>
+    <div class="cart-main-content">
+      <div class="cart-modal-items">
+        <div class="img-container">
+          <img src="/images/image-product-1-thumbnail.jpg" alt="" class="modal-image">
+        </div>
+        <div class="description">
+          <div class="details">
+            Fall Limited Edition Sneakers
+          </div>
+          <div class="price">
+            $125.00 x<span class="amt"></span> <span class="result"></span>
+          </div>
+        </div>
+        <div class="trash-icon">
+          <img src="/images/icon-delete.svg" alt="" class="modal-trash-icon">
+        </div>
+      </div>
+      
+      <button class="checkout-button">Checkout</button>
+    </div>
+  
+  </div>
+</div>
+
+  <script>
+    let closeButton = document.querySelector(".close-button");
+    let hamBurger = document.querySelector(".hamburger");
+    let mobileNavbar = document.querySelector(".mobile-navbar")
+
+    hamBurger.addEventListener("click", () => {
+        mobileNavbar.classList.add("show");
+      })
+
+      closeButton.addEventListener("click", () => {
+        mobileNavbar.classList.remove("show");
+      })
+    
+    
+      let images = document.querySelectorAll(".main-image > img");
+      let currentImage = 0;
+
+      function prevImage() {
+        images[currentImage].classList.remove("active");
+        currentImage = (currentImage - 1 + images.length) % images.length;
+        images[currentImage].classList.add("active");
+      }
+
+      function nextImage() {
+        images[currentImage].classList.remove("active");
+        currentImage = (currentImage + 1) % images.length;
+        images[currentImage].classList.add("active");
+      }
+let display  = document.querySelector(".display-number");
+ let cartBadge = document.querySelector('.cart-amount-badge');
+let subtractButton = document.querySelector("#minus-button");
+  let addButton = document.querySelector("#plus-button");
+  let cartContainer = document.querySelector(".cart-container");
+let amt  =  0;
+  let amtElement = document.querySelector(".amt");
+  let resultElement = document.querySelector(".result");
+  amtElement.textContent = amt;
+    resultElement.textContent = `$${(amt * 125.00).toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+
+ 
+subtractButton.addEventListener("click", () => {
+  if (amt > 0){
+    amt--;
+    display.textContent = amt;
+cartBadge.textContent = amt;
+    amtElement.textContent = amt;
+    resultElement.textContent = `$${(amt * 125.00).toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+  }
+
+})
+  addButton.addEventListener("click", () => {
+    amt++;
+    display.textContent = amt;
+cartBadge.textContent = amt;
+    amtElement.textContent = amt;
+    resultElement.textContent = `$${(amt * 125.00).toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+  })
+
+
+    let cartIcon = document.querySelector('.cart-icon');
+    let cartModal = document.querySelector('.cart-modal');
+    let cartContent = document.querySelector('.cart-main-content');
+    cartIcon.addEventListener("click", () => {
+        if (amt == 0) {
+          cartModal.style.display = "flex";
+          cartContent.textContent = "Your cart is empty";
+          cartContent.style.fontSize = "1.5rem";
+          cartContent.style.color = --Black-75percent-opacity
+        } else {
+          cartModal.style.display = cartModal.style.display == "block" ? "none" : "block";
+        }
+      })
+    
+
+  document.addEventListener("click", (e) => {
+    if (e.target !== cartIcon && !cartModal.contains(e.target)) {
+      cartModal.style.display = "none";
+    }
+  })
+
+  
+
+  </script>
+</body>
+
+</html>

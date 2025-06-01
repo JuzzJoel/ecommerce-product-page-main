@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: hsl(26, 100%, 55%);
+      --primary-light: hsl(25, 100%, 94%);
+      --secondary: hsl(220, 13%, 13%);
+      --text: hsl(219, 9%, 45%);
+      --bg: hsl(223, 64%, 98%);
+      --white: hsl(0, 0%, 100%);
+      --gray: hsl(220, 14%, 75%);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--white);
+      color: var(--secondary);
+      padding: 2rem;
+      line-height: 1.5;
+    }
+
+    .product {
+      max-width: 400px;
+      margin: auto;
+      background: var(--bg);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product h2 {
+      font-size: 1rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .product h1 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .product p {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .discount {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.875rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      margin-left: 0.5rem;
+    }
+
+    .old-price {
+      font-size: 0.875rem;
+      text-decoration: line-through;
+      color: var(--gray);
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .counter button {
+      border: none;
+      background: none;
+      color: var(--primary);
+      font-size: 1.25rem;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+    }
+
+    .counter span {
+      padding: 0 1rem;
+      font-weight: 600;
+    }
+
+    .add-to-cart {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .add-to-cart:hover {
+      background: hsl(26, 100%, 60%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="product">
+    <h2>Sneaker Company</h2>
+    <h1>Fall Limited Edition Sneakers</h1>
+    <p>These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll
+      withstand everything the weather can offer.</p>
+    <div class="price-container">
+      <div>
+        <span class="price">$125.00</span>
+        <span class="discount">50%</span>
+      </div>
+      <span class="old-price">$250.00</span>
+    </div>
+    <div class="controls">
+      <div class="counter">
+        <button id="decrease" aria-label="Decrease quantity"><i class='bx bx-minus'></i></button>
+        <span id="quantity">0</span>
+        <button id="increase" aria-label="Increase quantity"><i class='bx bx-plus'></i></button>
+      </div>
+      <button class="add-to-cart" id="addToCart">
+        <i class='bx bx-cart'></i> Add to cart
+      </button>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const quantityEl = document.getElementById("quantity");
+      const decreaseBtn = document.getElementById("decrease");
+      const increaseBtn = document.getElementById("increase");
+      const addToCartBtn = document.getElementById("addToCart");
+
+      let quantity = 0;
+
+      const updateQuantity = (change) => {
+        quantity = Math.max(0, quantity + change);
+        quantityEl.textContent = quantity;
+      };
+
+      decreaseBtn.addEventListener("click", () => updateQuantity(-1));
+      increaseBtn.addEventListener("click", () => updateQuantity(1));
+
+      addToCartBtn.addEventListener("click", () => {
+        if (quantity === 0) {
+          alert("Please select at least one item.");
+        } else {
+          alert(`${quantity} item(s) added to cart.`);
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

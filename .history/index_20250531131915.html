@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | E-commerce product page</title>
+  <style>
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --Orange: hsl(26, 100%, 55%);
+      --Pale-orange: hsl(25, 100%, 94%);
+      --Very-dark-blue: hsl(220, 13%, 13%);
+      --Dark-grayish-blue: hsl(219, 9%, 45%);
+      --Grayish-blue: hsl(220, 14%, 75%);
+      --Light-grayish-blue: hsl(223, 64%, 98%);
+      --White: hsl(0, 0%, 100%);
+      --Black-75percent-opacity: hsl(0, 0%, 0%);
+      --fz-paragraph: 1rem;
+      --ff: "Kumbh Sans", sans-serif;
+      --fw-normal: 400;
+      --fw-bold: 700;
+    }
+
+    body {
+      font-family: var(--ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    /* Mobile styles (default) */
+
+
+    .container {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-bar {
+      height: 20vh;
+      background: var(--White);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-weight: var(--fw-bold);
+    }
+
+    .header-container {
+      width: 90%;
+      height: 50%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .main-header {
+      width: 60%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      border: 1px solid #000;
+    }
+
+    .mobile-toggle {
+      width: 10%;
+      height: 100%;
+      align-items: center;
+      display: flex;
+    }
+
+    .mobile-close-icon-container {
+      cursor: pointer;
+      width: 10%;
+      height: 100%;
+    }
+
+    .mobile-toggle-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .mobile-close-icon {
+      margin-bottom: 10%;
+    }
+
+    .hamburger {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hamburger,
+    .close-button {
+      object-fit: contain;
+      width: 50%;
+      height: 50%;
+      cursor: pointer;
+    }
+
+    .mobile-navbar {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: var(--White);
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 70%;
+    }
+
+    .mobile-navbar-container {
+      width: 90%;
+      height: 90%;
+    }
+
+    .mobile-close-icon {
+      width: 100%;
+      height: 10%;
+    }
+
+    .mobile-nav {
+      height: 40%;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .mobile-nav a {
+      text-decoration: none;
+      color: var(--Black-75percent-opacity);
+      font-size: 1.1rem;
+      line-height: 1.2;
+      letter-spacing: 1px;
+    }
+
+    .logo {}
+
+    .main-navbar {
+      display: none;
+    }
+
+    .cart-user-profile {
+      width: 20%;
+      height: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #000;
+    }
+
+    .cart-container {
+      width: 50%;
+      height: 100%;
+      position: relative;
+    }
+
+    .cart-container::after {
+      position: absolute;
+      background: var(--Orange);
+      color: var(--White);
+      content: '3';
+      padding: 1px 7px;
+      top: -20%;
+      right: -5%;
+      border-radius: 50%;
+
+    }
+
+    .cart-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .profile-container {
+      width: 50%;
+      height: 100%;
+    }
+
+    .profile-image {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+
+    .display-products {
+      width: 100%;
+      height: 50vh;
+    }
+
+    .main-image {
+      height: auto;
+      width: 100%;
+      position: relative;
+    }
+
+    .direction {}
+
+    .move-icon {
+      object-fit: contain;
+      position: absolute;
+      top: 50%;
+    }
+
+    .right,
+    .left {
+      padding: 2px 6px;
+      background: var(--White);
+    }
+
+    .right .move-icon {}
+
+    .left {}
+
+    .left .move-icon {}
+
+    .thumbnails {
+      display: none;
+    }
+
+    .product-information {
+      height: 70vh;
+      width: 100%;
+    }
+
+    /* Tablet styles (768px and up) */
+    @media (min-width: 768px) {
+      .container {
+        width: 80%;
+      }
+    }
+
+    /* Desktop styles (1024px and up) */
+    @media (min-width: 1024px) {
+      .container {
+        width: 70%;
+        max-width: 1200px;
+      }
+    }
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="content">
+      <header class="header-bar">
+        <div class="header-container">
+          <div class="main-header">
+            <div class="mobile-toggle">
+              <div class="mobile-toggle-container">
+                <img src="/images/icon-menu.svg" alt="" class="hamburger">
+              </div>
+            </div>
+            <div class="mobile-navbar">
+              <div class="mobile-navbar-container">
+                <div class="mobile-close-icon">
+                  <div class="mobile-close-icon-container">
+                    <img src="/images/icon-close.svg" alt="" class="close-button">
+                  </div>
+                </div>
+                <ul class="mobile-nav">
+                  <l1><a href="">Collections</a></l1>
+                  <l1><a href="">Men</a></l1>
+                  <l1><a href="">Women</a></l1>
+                  <l1><a href="">About</a></l1>
+                  <l1><a href="">Contact</a></l1>
+                </ul>
+              </div>
+            </div>
+
+            <div class="logo">
+              <div class="logo-container">
+                <img src="/images/logo.svg" alt="">
+              </div>
+            </div>
+            <div class="main-navbar">
+              <nav class="main-navigation">
+                <ul class="desktop-nav">
+                  <l1><a href="">Collections
+
+
+                    </a></l1>
+                  <l1><a href="">Men</a></l1>
+                  <l1><a href="">Women</a></l1>
+                  <l1><a href="">About</a></l1>
+                  <l1><a href="">Contact</a></l1>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="cart-user-profile">
+            <div class="cart-container">
+              <img src="/images/icon-cart.svg" alt="" class="cart-icon">
+            </div>
+            <div class="profile-container">
+              <img src="/images/image-avatar.png" alt="" class="profile-image">
+            </div>
+          </div>
+        </div>
+
+      </header>
+      <main class="main-content">
+        <section class="display-products">
+          <div class="display-products-container">
+            <div class="main-image">
+              <div class="direction">
+                <div class="right">
+                  <img src="/images/icon-previous.svg" alt="" class="move-icon">
+                </div>
+                <div class="left">
+                  <img src="/images/icon-next.svg" alt="" class="move-icon">
+                </div>
+
+              </div>
+              <img src="/images/image-product-1.jpg" alt=""> 
+              <img src="/images/image-product-2.jpg" alt=""> 
+              <img src="/images/image-product-3.jpg" alt="">
+                 <img src="/images/image-product-1.jpg" alt="">
+            </div>
+
+            <div class="thumbnails">
+
+            </div>
+          </div>
+
+        </section>
+        <section class="product-information">
+          <div class="product-information-container">
+            <div class="product-information-content">
+              <h5 class="eyebrow">
+                Sneaker Company
+              </h5>
+              <h2>
+                Fall Limited Edition Sneakers
+              </h2>
+              <p>
+                These low-profile sneakers are your perfect casual wear companion. Featuring a
+                durable rubber outer sole, they’ll withstand everything the weather can offer.
+              </p>
+              <div class="prices">
+                <div class="new-discount">
+                  <div class="new"></div>
+                  <div class="discount"></div>
+                </div>
+                <div class="old"></div>
+
+              </div>
+
+            </div>
+
+
+
+            $125.00
+            50%
+            $250.00
+
+            0
+            Add to cart
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+  <script>
+    let closeButton = document.querySelector(".close-button");
+    let hamBurger = document.querySelector(".hamburger");
+    let mobileNavbar = document.querySelector(".mobile-navbar")
+
+    hamBurger.addEventListener("click", () => {
+      mobileNavbar.style.display = "flex";
+    })
+    closeButton.addEventListener("click", () => {
+      mobileNavbar.style.display = "none";
+    })
+  </script>
+</body>
+
+</html>

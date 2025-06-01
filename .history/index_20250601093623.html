@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Page</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="nav-container">
+      <div class="left-nav">
+        <img src="images/icon-menu.svg" class="hamburger" alt="Menu icon">
+        <img src="images/logo.svg" class="logo" alt="Sneakers logo">
+        <nav class="desktop-nav">
+          <ul>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="right-nav">
+        <div class="cart-container">
+          <img src="images/icon-cart.svg" class="cart-icon" alt="Cart icon">
+          <span class="cart-count">0</span>
+        </div>
+        <img src="images/image-avatar.png" class="avatar" alt="User avatar">
+      </div>
+    </div>
+
+    <div class="mobile-navbar">
+      <div class="close-button">&times;</div>
+      <ul>
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="product-main">
+    <section class="product-gallery">
+      <div class="image-slider">
+        <div class="arrow left" id="prevBtn">❮</div>
+        <img src="images/image-product-1.jpg" alt="Product Image" class="main-image">
+        <div class="arrow right" id="nextBtn">❯</div>
+      </div>
+      <div class="thumbnails">
+        <img src="images/image-product-1-thumbnail.jpg" alt="Thumbnail 1">
+        <img src="images/image-product-2-thumbnail.jpg" alt="Thumbnail 2">
+        <img src="images/image-product-3-thumbnail.jpg" alt="Thumbnail 3">
+        <img src="images/image-product-4-thumbnail.jpg" alt="Thumbnail 4">
+      </div>
+    </section>
+
+    <section class="product-details">
+      <h1 class="company">Sneaker Company</h1>
+      <h2 class="title">Fall Limited Edition Sneakers</h2>
+      <p class="description">
+        These low-profile sneakers are your perfect casual wear companion. Featuring a
+        durable rubber outer sole, they’ll withstand everything the weather can offer.
+      </p>
+      <div class="price-info">
+        <div class="current-price">
+          <span>$125.00</span>
+          <span class="discount">50%</span>
+        </div>
+        <div class="original-price">$250.00</div>
+      </div>
+      <div class="purchase-controls">
+        <div class="quantity-selector">
+          <button class="decrement">-</button>
+          <span class="quantity">0</span>
+          <button class="increment">+</button>
+        </div>
+        <button class="add-to-cart">
+          <img src="images/icon-cart.svg" alt="Cart icon">
+          Add to Cart
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-modal">
+    <h3>Cart</h3>
+    <div class="cart-content empty">Your cart is empty.</div>
+  </div>
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.querySelector('.hamburger');
+    const closeBtn = document.querySelector('.close-button');
+    const mobileNav = document.querySelector('.mobile-navbar');
+
+    hamburger.addEventListener('click', () => mobileNav.classList.add('show'));
+    closeBtn.addEventListener('click', () => mobileNav.classList.remove('show'));
+
+    // Cart modal toggle
+    const cartIcon = document.querySelector('.cart-container');
+    const cartModal = document.querySelector('.cart-modal');
+
+    cartIcon.addEventListener('click', () => {
+      cartModal.classList.toggle('show');
+    });
+
+    // Image slider (basic)
+    const mainImage = document.querySelector('.main-image');
+    const images = [
+      'images/image-product-1.jpg',
+      'images/image-product-2.jpg',
+      'images/image-product-3.jpg',
+      'images/image-product-4.jpg'
+    ];
+    let current = 0;
+
+    document.getElementById('prevBtn').onclick = () => {
+      current = (current - 1 + images.length) % images.length;
+      mainImage.src = images[current];
+    };
+
+    document.getElementById('nextBtn').onclick = () => {
+      current = (current + 1) % images.length;
+      mainImage.src = images[current];
+    };
+  </script>
+</body>
+</html>
