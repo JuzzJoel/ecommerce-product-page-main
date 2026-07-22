@@ -1,7 +1,7 @@
 # Frontend Mentor - E-commerce product page solution
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JuzzJoel/joel-olajiire/master/public/covers/ecommerce-product-page-main.jpg" alt="E-commerce Product Page Screenshot" width="800" />
+  <img src="cover.jpg" alt="E-commerce Product Page Screenshot" width="800" />
 </p>
 
 This is a solution to the [E-commerce product page challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/ecommerce-product-page-UPsZ9MJp6). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
